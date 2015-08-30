@@ -28,9 +28,9 @@ type Conn struct {
 // }
 
 func (c *Conn) ReadPacket() (pkt Packet, err error) {
-	var pktLen, code VarInt
+	var _, code VarInt
 	v := McVersion(0)
-	if pktLen, err = DecodeVarInt(c, v); err != nil {
+	if _, err = DecodeVarInt(c, v); err != nil {
 		return nil, err
 	}
 	if code, err = DecodeVarInt(c, v); err != nil {
@@ -50,8 +50,6 @@ func (c *Conn) ReadPacket() (pkt Packet, err error) {
 	if err = pkt.Read(c, v); err != nil {
 		return nil, err
 	}
-
-	fmt.Printf("packet [%d] #0x%02X\n", pktLen, code)
 
 	return
 

@@ -571,14 +571,18 @@ func (pkt *ClientPluginMessage) Read(c *Conn, v McVersion) (err error) {
 	if pkt.Channel, err = DecodeString(c, v); err != nil {
 		return
 	}
-	TODO(pkt.Data)
+	if pkt.Data, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *ClientPluginMessage) Write(c *Conn, v McVersion) (err error) {
 	if err = EncodeString(pkt.Channel, c, v); err != nil {
 		return
 	}
-	TODO(pkt.Data)
+	if err = EncodeBuffer(pkt.Data, c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *Slot) Read(c *Conn, v McVersion) (err error) {
@@ -591,7 +595,9 @@ func (pkt *Slot) Read(c *Conn, v McVersion) (err error) {
 	if pkt.Damage, err = decodeInt16(c, v); err != nil {
 		return
 	}
-	TODO(pkt.Tag)
+	if pkt.Tag, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *Slot) Write(c *Conn, v McVersion) (err error) {
@@ -604,7 +610,9 @@ func (pkt *Slot) Write(c *Conn, v McVersion) (err error) {
 	if err = encodeInt16(pkt.Damage, c, v); err != nil {
 		return
 	}
-	TODO(pkt.Tag)
+	if err = EncodeBuffer(pkt.Tag, c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *KeepAlive) Read(c *Conn, v McVersion) (err error) {
@@ -1534,7 +1542,9 @@ func (pkt *ChunkData) Read(c *Conn, v McVersion) (err error) {
 	if pkt.AddBitMap, err = decodeUint16(c, v); err != nil {
 		return
 	}
-	TODO(pkt.CompressedData)
+	if pkt.CompressedData, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *ChunkData) Write(c *Conn, v McVersion) (err error) {
@@ -1553,7 +1563,9 @@ func (pkt *ChunkData) Write(c *Conn, v McVersion) (err error) {
 	if err = encodeUint16(pkt.AddBitMap, c, v); err != nil {
 		return
 	}
-	TODO(pkt.CompressedData)
+	if err = EncodeBuffer(pkt.CompressedData, c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *MultiBlockChange) Read(c *Conn, v McVersion) (err error) {
@@ -1566,7 +1578,9 @@ func (pkt *MultiBlockChange) Read(c *Conn, v McVersion) (err error) {
 	if pkt.RecordCount, err = decodeInt16(c, v); err != nil {
 		return
 	}
-	TODO(pkt.Data)
+	if pkt.Data, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *MultiBlockChange) Write(c *Conn, v McVersion) (err error) {
@@ -1579,7 +1593,9 @@ func (pkt *MultiBlockChange) Write(c *Conn, v McVersion) (err error) {
 	if err = encodeInt16(pkt.RecordCount, c, v); err != nil {
 		return
 	}
-	TODO(pkt.Data)
+	if err = EncodeBuffer(pkt.Data, c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *BlockChange) Read(c *Conn, v McVersion) (err error) {
@@ -1688,7 +1704,9 @@ func (pkt *MapChunkBulk) Read(c *Conn, v McVersion) (err error) {
 		return
 	}
 	TODO(pkt.SkyLight)
-	TODO(pkt.Data)
+	if pkt.Data, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	TODO(pkt.Meta)
 	return
 }
@@ -1700,7 +1718,9 @@ func (pkt *MapChunkBulk) Write(c *Conn, v McVersion) (err error) {
 		return
 	}
 	TODO(pkt.SkyLight)
-	TODO(pkt.Data)
+	if err = EncodeBuffer(pkt.Data, c, v); err != nil {
+		return
+	}
 	TODO(pkt.Meta)
 	return
 }
@@ -2084,14 +2104,18 @@ func (pkt *Maps) Read(c *Conn, v McVersion) (err error) {
 	if pkt.ItemData, err = DecodeVarInt(c, v); err != nil {
 		return
 	}
-	TODO(pkt.Data)
+	if pkt.Data, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *Maps) Write(c *Conn, v McVersion) (err error) {
 	if err = EncodeVarInt(pkt.ItemData, c, v); err != nil {
 		return
 	}
-	TODO(pkt.Data)
+	if err = EncodeBuffer(pkt.Data, c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *UpdateBlockEntity) Read(c *Conn, v McVersion) (err error) {
@@ -2105,7 +2129,9 @@ func (pkt *UpdateBlockEntity) Read(c *Conn, v McVersion) (err error) {
 		return
 	}
 	TODO(pkt.Action)
-	TODO(pkt.Data)
+	if pkt.Data, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *UpdateBlockEntity) Write(c *Conn, v McVersion) (err error) {
@@ -2119,7 +2145,9 @@ func (pkt *UpdateBlockEntity) Write(c *Conn, v McVersion) (err error) {
 		return
 	}
 	TODO(pkt.Action)
-	TODO(pkt.Data)
+	if err = EncodeBuffer(pkt.Data, c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *SignEditorOpen) Read(c *Conn, v McVersion) (err error) {
@@ -2337,14 +2365,18 @@ func (pkt *PluginMessage) Read(c *Conn, v McVersion) (err error) {
 	if pkt.Channel, err = DecodeString(c, v); err != nil {
 		return
 	}
-	TODO(pkt.Data)
+	if pkt.Data, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *PluginMessage) Write(c *Conn, v McVersion) (err error) {
 	if err = EncodeString(pkt.Channel, c, v); err != nil {
 		return
 	}
-	TODO(pkt.Data)
+	if err = EncodeBuffer(pkt.Data, c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *Disconnect) Read(c *Conn, v McVersion) (err error) {
@@ -2375,16 +2407,24 @@ func (pkt *EncryptionKeyRequest) Read(c *Conn, v McVersion) (err error) {
 	if pkt.ServerID, err = DecodeString(c, v); err != nil {
 		return
 	}
-	TODO(pkt.PublicKey)
-	TODO(pkt.VerifyToken)
+	if pkt.PublicKey, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
+	if pkt.VerifyToken, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *EncryptionKeyRequest) Write(c *Conn, v McVersion) (err error) {
 	if err = EncodeString(pkt.ServerID, c, v); err != nil {
 		return
 	}
-	TODO(pkt.PublicKey)
-	TODO(pkt.VerifyToken)
+	if err = EncodeBuffer(pkt.PublicKey, c, v); err != nil {
+		return
+	}
+	if err = EncodeBuffer(pkt.VerifyToken, c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *LoginSuccess) Read(c *Conn, v McVersion) (err error) {
@@ -2418,73 +2458,21 @@ func (pkt *LoginStart) Write(c *Conn, v McVersion) (err error) {
 	return
 }
 func (pkt *EncryptionKeyResponse) Read(c *Conn, v McVersion) (err error) {
-	TODO(pkt.SharedSecret)
-	TODO(pkt.VerifyToken)
+	if pkt.SharedSecret, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
+	if pkt.VerifyToken, err = DecodeBuffer(c, v); err != nil {
+		return
+	}
 	return
 }
 func (pkt *EncryptionKeyResponse) Write(c *Conn, v McVersion) (err error) {
-	TODO(pkt.SharedSecret)
-	TODO(pkt.VerifyToken)
-	return
-}
-func encodeInt32(i int32, c *Conn, v McVersion) (err error) {
-	buf := c.wb[:4]
-	binary.BigEndian.PutUint32(buf, uint32(i))
-	_, err = c.Out.Write(buf)
-	return
-}
-func decodeInt32(c *Conn, v McVersion) (i int32, err error) {
-	buf := c.rb[:4]
-	_, err = io.ReadFull(c.In, buf)
-	if err != nil {
+	if err = EncodeBuffer(pkt.SharedSecret, c, v); err != nil {
 		return
 	}
-	i = int32(binary.BigEndian.Uint32(buf))
-	return
-}
-func encodeInt16(i int16, c *Conn, v McVersion) (err error) {
-	buf := c.wb[:2]
-	binary.BigEndian.PutUint16(buf, uint16(i))
-	_, err = c.Out.Write(buf)
-	return
-}
-func decodeInt16(c *Conn, v McVersion) (i int16, err error) {
-	buf := c.rb[:2]
-	_, err = io.ReadFull(c.In, buf)
-	if err != nil {
+	if err = EncodeBuffer(pkt.VerifyToken, c, v); err != nil {
 		return
 	}
-	i = int16(binary.BigEndian.Uint16(buf))
-	return
-}
-func encodeUint64(i uint64, c *Conn, v McVersion) (err error) {
-	buf := c.wb[:8]
-	binary.BigEndian.PutUint64(buf, i)
-	_, err = c.Out.Write(buf)
-	return
-}
-func decodeUint64(c *Conn, v McVersion) (i uint64, err error) {
-	buf := c.rb[:8]
-	_, err = io.ReadFull(c.In, buf)
-	if err != nil {
-		return
-	}
-	i = binary.BigEndian.Uint64(buf)
-	return
-}
-func encodeInt64(i int64, c *Conn, v McVersion) (err error) {
-	buf := c.wb[:8]
-	binary.BigEndian.PutUint64(buf, uint64(i))
-	_, err = c.Out.Write(buf)
-	return
-}
-func decodeInt64(c *Conn, v McVersion) (i int64, err error) {
-	buf := c.rb[:8]
-	_, err = io.ReadFull(c.In, buf)
-	if err != nil {
-		return
-	}
-	i = int64(binary.BigEndian.Uint64(buf))
 	return
 }
 func encodeUint16(i uint16, c *Conn, v McVersion) (err error) {
@@ -2515,5 +2503,65 @@ func decodeUint32(c *Conn, v McVersion) (i uint32, err error) {
 		return
 	}
 	i = binary.BigEndian.Uint32(buf)
+	return
+}
+func encodeInt64(i int64, c *Conn, v McVersion) (err error) {
+	buf := c.wb[:8]
+	binary.BigEndian.PutUint64(buf, uint64(i))
+	_, err = c.Out.Write(buf)
+	return
+}
+func decodeInt64(c *Conn, v McVersion) (i int64, err error) {
+	buf := c.rb[:8]
+	_, err = io.ReadFull(c.In, buf)
+	if err != nil {
+		return
+	}
+	i = int64(binary.BigEndian.Uint64(buf))
+	return
+}
+func encodeInt16(i int16, c *Conn, v McVersion) (err error) {
+	buf := c.wb[:2]
+	binary.BigEndian.PutUint16(buf, uint16(i))
+	_, err = c.Out.Write(buf)
+	return
+}
+func decodeInt16(c *Conn, v McVersion) (i int16, err error) {
+	buf := c.rb[:2]
+	_, err = io.ReadFull(c.In, buf)
+	if err != nil {
+		return
+	}
+	i = int16(binary.BigEndian.Uint16(buf))
+	return
+}
+func encodeInt32(i int32, c *Conn, v McVersion) (err error) {
+	buf := c.wb[:4]
+	binary.BigEndian.PutUint32(buf, uint32(i))
+	_, err = c.Out.Write(buf)
+	return
+}
+func decodeInt32(c *Conn, v McVersion) (i int32, err error) {
+	buf := c.rb[:4]
+	_, err = io.ReadFull(c.In, buf)
+	if err != nil {
+		return
+	}
+	i = int32(binary.BigEndian.Uint32(buf))
+	return
+}
+func encodeUint64(i uint64, c *Conn, v McVersion) (err error) {
+	buf := c.wb[:8]
+	binary.BigEndian.PutUint64(buf, i)
+	_, err = c.Out.Write(buf)
+	return
+}
+func decodeUint64(c *Conn, v McVersion) (i uint64, err error) {
+	buf := c.rb[:8]
+	_, err = io.ReadFull(c.In, buf)
+	if err != nil {
+		return
+	}
+	i = binary.BigEndian.Uint64(buf)
 	return
 }

@@ -16,7 +16,7 @@ var types = map[string]spec{
 	"float32":  nil, //t(parseFloat, 4, true),
 	"float64":  nil, //t(parseFloat, 8, true),
 	"string":   ext("EncodeString", "DecodeString"),
-	"Buffer":   nil, //ext("encodeBuffer", "decodeBuffer"),
+	"Buffer":   ext("EncodeBuffer", "DecodeBuffer"),
 	"Position": nil, //ext("encodePosition", "decodePosition"),
 	"MetaData": nil, //ext("encodeMetaData", "decodeMetaData"),
 }

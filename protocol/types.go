@@ -168,6 +168,16 @@ type Position struct {
 	Z int32
 }
 
+func DecodeBuffer(c *Conn, v McVersion) (b Buffer, err error) {
+	b = Buffer{}
+	err = b.Read(c, v)
+	return
+}
+
+func EncodeBuffer(buf Buffer, c *Conn, v McVersion) (err error) {
+	return buf.Write(c, v)
+}
+
 type Buffer []byte
 
 func (s Buffer) Write(c *Conn, v McVersion) (err error) {
